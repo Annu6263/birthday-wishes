@@ -1,0 +1,132 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:70px;
+  animation: glow 2s infinite alternate;
+}
+
+.hero p{
+  margin-top:20px;
+  font-size:24px;
+}
+
+.btn{
+  margin-top:30px;
+  padding:15px 30px;
+  background:white;
+  color:#ff4b7d;
+  text-decoration:none;
+  border-radius:50px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+}
+
+@keyframes glow{
+  from{
+    text-shadow:0 0 10px white;
+  }
+  to{
+    text-shadow:0 0 30px pink;
+  }
+}
+
+.container{
+  padding:50px;
+  text-align:center;
+}
+
+.memory-card{
+  margin:40px auto;
+  width:300px;
+}
+
+.memory-card img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(255,255,255,0.5);
+}
+
+.gallery{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  padding:40px;
+}
+
+.gallery img{
+  width:300px;
+  border-radius:20px;
+  transition:0.4s;
+}
+
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+#game-area{
+  width:400px;
+  height:400px;
+  margin:50px auto;
+  position:relative;
+  border:3px dashed white;
+}
+
+#heart{
+  position:absolute;
+  font-size:50px;
+  cursor:pointer;
+  top:100px;
+  left:100px;
+}
+
+#score{
+  text-align:center;
+  font-size:30px;
+}
+
+.final-page{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.final-box{
+  background:rgba(255,255,255,0.2);
+  padding:50px;
+  border-radius:30px;
+  text-align:center;
+  width:70%;
+  backdrop-filter:blur(10px);
+}
+
+.cake{
+  font-size:60px;
+  margin-top:20px;
+}
