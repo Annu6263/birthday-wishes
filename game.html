@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catch Hearts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Catch The Hearts ❤️</h1>
+
+<div id="game-area">
+  <div id="heart">❤️</div>
+</div>
+
+<p id="score">Score: 0</p>
+
+<a href="finalwish.html" class="btn">Final Surprise 🎁</a>
+
+<script>
+let heart = document.getElementById("heart");
+let score = 0;
+
+heart.addEventListener("click", () => {
+  score++;
+  document.getElementById("score").innerText = "Score: " + score;
+
+  heart.style.top = Math.random() * 300 + "px";
+  heart.style.left = Math.random() * 300 + "px";
+});
+</script>
+
+</body>
+</html>
