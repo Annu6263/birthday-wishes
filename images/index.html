@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Boss! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #ff6b81;
+            --secondary-color: #ff7f50;
+            --bg-gradient: linear-gradient(135deg, #ffeaa7 0%, #ffb8b8 100%);
+            --text-color: #2d3436;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Background Music Floating Button */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .audio-control:hover { transform: scale(1.05); }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* Hero Header */
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #d63031;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #485460;
+        }
+
+        /* The Wishes Card */
+        .wishes-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 30px 0;
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+        }
+
+        .wishes-card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .wishes-card .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-align: right;
+        }
+
+        /* Interactive Photo Gallery */
+        .gallery-title {
+            margin: 40px 0 20px;
+            font-size: 1.8rem;
+            color: #2d3436;
+            position: relative;
+        }
+        .gallery-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .gallery-item p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+            color: #636e72;
+        }
+
+        /* Interactive Celebrate Button */
+        .btn-celebrate {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+            margin: 40px 0;
+            transition: all 0.2s;
+        }
+
+        .btn-celebrate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 129, 0.6);
+        }
+        .btn-celebrate:active { transform: translateY(1px); }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.5rem; }
+            .wishes-card { padding: 25px 20px; }
+            .wishes-card p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="audio-control" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span> <span id="music-text">Play Music</span>
+    </div>
+    <audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <div class="container">
+        <header>
+            <h1>Happy Birthday to an Amazing Lead! 🎂</h1>
+            <p>Celebrating the incredible person and mentor you are</p>
+        </header>
+
+        <section class="wishes-card">
+            <p>
+                "To a wonderful Team Lead who isn't just an inspiration at work, but someone who shares a beautiful bond with all of us. Thank you for your constant guidance, patience, and for making the workspace feel like a team in the truest sense. May your year ahead be filled with endless joy, massive success, and beautiful memories!"
+            </p>
+            <div class="signature">- From Your Team ✨</div>
+        </section>
+
+        <button class="btn-celebrate" onclick="triggerConfetti()">Click to Celebrate! 🎉</button>
+
+        <h3 class="gallery-title">Moments & Memories</h3>
+        <section class="gallery-grid">
+            
+            <div class="gallery-item" onclick="triggerConfetti()">
+                <img src="birthday_cake.jpg" alt="Birthday Celebration">
+                <p>Happy Birthday! 🎈</p>
+            </div>
+
+            <div class="gallery-item" onclick="triggerConfetti()">
+                <img src="travel_moment.jpg" alt="Out and About">
+                <p>Chasing Adventures ✨</p>
+            </div>
+
+            <div class="gallery-item" onclick="triggerConfetti()">
+                <img src="dinner_night.jpg" alt="Beautiful Evenings">
+                <p>Good Times & Great Tales 🥂</p>
+            </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Automatic Confetti Burst on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                triggerConfetti();
+            }, 500);
+        });
+
+        // Confetti Effect Function
+        function triggerConfetti() {
+            // Left burst
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x: 0.1, y: 0.6 }
+            });
+            // Right burst
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x: 0.9, y: 0.6 }
+            });
+        }
+
+        // Background Music Control
+        const music = document.getElementById('bg-music');
+        const icon = document.getElementById('music-icon');
+        const text = document.getElementById('music-text');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(error => console.log("Audio play blocked by browser rules initially. Click again."));
+                icon.innerText = "⏸️";
+                text.innerText = "Pause";
+            } else {
+                music.pause();
+                icon.innerText = "🎵";
+                text.innerText = "Play Music";
+            }
+        }
+    </script>
+</body>
+</html>
