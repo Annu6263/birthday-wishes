@@ -1,19 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday!</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #fce4ec; }
-        h1 { color: #d81b60; }
-        p { font-size: 1.2rem; color: #555; }
-        .container { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        body { margin: 0; font-family: 'Arial', sans-serif; background: #fff0f5; text-align: center; }
+        .hero { padding: 50px 20px; background: linear-gradient(135deg, #ff9a9e, #fad0c4); color: white; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        img { width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        img:hover { transform: scale(1.05); }
+        .message { padding: 40px; font-size: 1.5rem; color: #d63384; font-weight: bold; }
+        /* Simple Celebration Effect */
+        #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Happy Birthday!</h1>
-        <p>Wishing you a wonderful year ahead filled with success and happiness!</p>
-        <p>Thank you for being such an amazing team lead.</p>
+
+    <div class="hero">
+        <h1>Happy Birthday to an Amazing Team Lead! 🎂</h1>
+        <p>Wishing you a day filled with joy and a year filled with success.</p>
     </div>
+
+    <div class="message">"Thank you for your guidance and for being such a wonderful person!"</div>
+
+    <div class="gallery">
+        <img src="photo1.jpg" alt="Memory">
+        <img src="photo2.jpg" alt="Memory">
+        <img src="photo3.jpg" alt="Memory">
+        <img src="photo4.jpg" alt="Memory">
+    </div>
+
+    <canvas id="confetti"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    </script>
 </body>
 </html>
+p
